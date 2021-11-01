@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
+@font-face {
+    font-family: 'Brush Script Std';
+    src: local('Brush Script Std'), url(./fonts/BrushScriptStd.otf) format('otf');
+}
+@font-face {
+    font-family: 'Century Gothic';
+    src: local('Century Gothic'), url(./fonts/CenturyGothic.ttf) format('ttf');
+}
 @tailwind utilities;
