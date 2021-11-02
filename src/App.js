@@ -17,6 +17,16 @@ const portfolio_screenshots = [
   require('./assets/img/portfolio/4.png').default
 ];
 
+const linkup_screenshots = [
+  require('./assets/img/linkup/1.png').default,
+  require('./assets/img/linkup/2.png').default,
+  require('./assets/img/linkup/3.png').default,
+  require('./assets/img/linkup/4.png').default,
+  require('./assets/img/linkup/5.png').default,
+  require('./assets/img/linkup/6.png').default,
+  require('./assets/img/linkup/7.png').default
+];
+
 class App extends Component {
 
   constructor(props) {
@@ -25,7 +35,9 @@ class App extends Component {
   
     this.state = {
 
-      showCarousel: false
+      showCarousel: false,
+
+      slides: []
        
     }
 
@@ -67,9 +79,43 @@ class App extends Component {
 
   }
 
-  toggleCarouselModal = () => {
+  toggleCarouselModal = (value = null) => {
 
-    this.setState({ showCarousel: !this.state.showCarousel })
+    this.setState({ showCarousel: !this.state.showCarousel });
+
+    if(value !== null) {
+
+      this.changeSlides(value);
+
+    } else {
+
+      this.setState({ slides: []});
+
+    }
+
+  }
+
+  changeSlides = value => {
+
+    switch(value) {
+
+      case 'portfolio':
+
+        this.setState({ slides: portfolio_screenshots });
+
+        break;
+
+      case 'linkup':
+
+        this.setState({ slides: linkup_screenshots });
+
+        break;
+
+      default:
+
+        break;
+
+    }
 
   }
   
@@ -101,7 +147,7 @@ class App extends Component {
 
               <Menu.Button className="text-white focus:outline-none p-5">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
 
@@ -191,9 +237,9 @@ class App extends Component {
 
                 <h1 className="text-gray-900 text-xl md:text-3xl font-bold uppercase">About Me</h1>
 
-                <p className="text-gray-800 text-md md:text-lg capitalize">I'm Kevin Moturi. I Am A Passionate, Scalable And Flexible Full Stack Software Developer With Key Interest In Javascript. I Am Able To Make Wide Range Of Applications For Web, Mobile And Desktop.</p>
+                <p className="text-gray-800 text-md md:text-lg capitalize">I Am A Passionate Full Stack Software Developer With Key Interest In Javascript And Now Python. I Am Able To Make Wide Range Of Applications For Web, Mobile And Desktop.</p>
 
-                <p className="text-gray-800 text-md md:text-lg capitalize">I Have A Strong Work Ethic And Go Beyond Expectations To Achieve Project Targets. I Am Also Continually Learning New Languages And Development Techniques For Career Advancement.</p>
+                <p className="text-gray-800 text-md md:text-lg capitalize">I Have A Strong Work Ethic And Go Beyond Expectations To Achieve Project Targets. I Also Continually Learn New Languages And Development Techniques For Career Advancement.</p>
 
                 <div className="flex flex-row items-center justify-end py-5 gap-x-8 px-10 md:px-0">
 
@@ -273,7 +319,7 @@ class App extends Component {
 
                 <h1 className="text-lg md:text-xl font-bold text-white uppercase">Mobile Development - React Native</h1>
 
-                <p className="text-gray-300 text-md md:text-lg capitalize">I Use React Because Its Fast, Simple And Scalable And Allows Me To Create Reusable UI Components And Its Easy To Integrate Other External Javascript Libraries</p>
+                <p className="text-gray-300 text-md md:text-lg capitalize">React Native is easy to create cross platform applications especially when targeting ios and android users. It also brings uniformity across all platforms.</p>
 
               </div>
 
@@ -307,13 +353,25 @@ class App extends Component {
 
                 <Tab.Panel key="UI" className={classNames('bg-transparent p-3 grid grid-cols-1 md:grid-cols-4 gap-5','focus:outline-none')}>
 
-                  <div className="flex flex-col bg-white shadow-md cursor-pointer rounded-sm" onClick={() => this.toggleCarouselModal()}>
+                  <div className="flex flex-col bg-white shadow-md cursor-pointer rounded-sm" onClick={() => this.toggleCarouselModal('portfolio')}>
 
                     <img className="h-36 w-full object-cover" src={portfolio_screenshots[0]} alt="portfolio website" />
 
                     <div className="py-5 flex flex-col items-center justify-center">
 
                       <span className="text-xl uppercase text-center">My Portfolio</span>
+
+                    </div>
+
+                  </div>
+
+                  <div className="flex flex-col bg-white shadow-md cursor-pointer rounded-sm" onClick={() => this.toggleCarouselModal('linkup')}>
+
+                    <img className="h-36 w-full object-cover" src={linkup_screenshots[0]} alt="linkup video call" />
+
+                    <div className="py-5 flex flex-col items-center justify-center">
+
+                      <span className="text-xl uppercase text-center">Video Call App</span>
 
                     </div>
 
@@ -367,7 +425,7 @@ class App extends Component {
                     
         >
 
-          <CarouselModal toggle={this.toggleCarouselModal} sliders={portfolio_screenshots} />
+          <CarouselModal toggle={this.toggleCarouselModal} sliders={this.state.slides} />
         
         </Transition>
         
