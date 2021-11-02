@@ -33,7 +33,7 @@ function Carousel({ toggle, sliders }) {
 
             <div className="flex-1 bg-gray-900 bg-opacity-80 flex flex-col justify-center items-center" ref={overlay}>
 
-                <div className="bg-transparent flex flex-col p-10 max-w-3xl mx-auto px-4 md:px-10 w-full">
+                <div className="bg-transparent flex flex-col px-10 md:p-10 w-screen md:max-w-3xl mx-auto  md:px-10 md:w-full">
 
                     <div className="flex flex-row justify-end items-center py-3">
 
